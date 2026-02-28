@@ -16,40 +16,48 @@ function playM3u8(url) {
         video.addEventListener('canplay', function () {
             video.play();
         });
-        video.volume = 0.3;
+        // video.volume = 0.3;
         // document.title = url;
     }
 }
 
 function playPause() {
+    console.log(`playPause ${video.paused}`)
     video.paused ? video.play() : video.pause();
 }
 
 function volumeUp() {
+    console.log(`volumeUp ${video.volume}`)
     if (video.volume <= 0.9) video.volume += 0.1;
 }
 
 function volumeDown() {
+    console.log(`volumeDown ${video.volume}`)
     if (video.volume >= 0.1) video.volume -= 0.1;
 }
 
 function seekRight() {
+    console.log(`seekRight ${video.currentTime}`)
     video.currentTime += 5;
 }
 
 function seekLeft() {
+    console.log(`seekLeft ${video.currentTime}`)
     video.currentTime -= 5;
 }
 
 function increasePlaybackRate() {
+    console.log(`increasePlaybactRate ${video.playbackRate}`)
     video.playbackRate += 0.1;
 }
 
 function decreasePlaybackRate() {
-    video.playbackRate -= 0.1;
+    console.log(`decreasePlaybactRate ${video.playbackRate}`)
+    if (video.playbackRate >= 0.1) video.playbackRate -= 0.1;
 }
 
 function toggleMute() {
+    console.log(`toggleMute ${video.muted}`)
     video.muted = !video.muted;
 }
 
@@ -75,6 +83,6 @@ $(window).on('load', function () {
     Mousetrap.bind('left', seekLeft);
     Mousetrap.bind('f', vidFullscreen);
     Mousetrap.bind('m', toggleMute);
-    Mousetrap.bind('ctrl .', increasePlaybackRate);
-    Mousetrap.bind('ctrl ,', decreasePlaybackRate);
+    Mousetrap.bind('ctrl+.', increasePlaybackRate);
+    Mousetrap.bind('ctrl+,', decreasePlaybackRate);
 });
