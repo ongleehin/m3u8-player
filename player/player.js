@@ -10,14 +10,14 @@ function playM3u8(url) {
         hls.on(Hls.Events.MANIFEST_PARSED, function () {
             video.play();
         });
-        document.title = url;
+        // document.title = url;
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         video.src = url;
         video.addEventListener('canplay', function () {
             video.play();
         });
         video.volume = 0.3;
-        document.title = url;
+        // document.title = url;
     }
 }
 
@@ -39,6 +39,14 @@ function seekRight() {
 
 function seekLeft() {
     video.currentTime -= 5;
+}
+
+function increasePlaybackRate() {
+    video.playbackRate += 0.1;
+}
+
+function decreasePlaybackRate() {
+    video.playbackRate -= 0.1;
 }
 
 function toggleMute() {
@@ -67,4 +75,6 @@ $(window).on('load', function () {
     Mousetrap.bind('left', seekLeft);
     Mousetrap.bind('f', vidFullscreen);
     Mousetrap.bind('m', toggleMute);
+    Mousetrap.bind('ctrl .', increasePlaybackRate);
+    Mousetrap.bind('ctrl ,', decreasePlaybackRate);
 });
